@@ -9,8 +9,8 @@ import Foundation
 public class MockTimerFactory: TimerFactory {
     
     public private(set) var builders: [MockBuilder] = []
-    public var targetExecutors: [TargetExecutor<Timer>] {
-        return builders.flatMap { $0.targetExecutor }
+    public var completionExecutors: [CompletionExecutor<Timer>] {
+        return builders.flatMap { $0.completionExecutor }
     }
     
     public override func create() -> Builder {
@@ -25,7 +25,7 @@ public class MockTimerFactory: TimerFactory {
         public private(set) var repeats: Bool?
         public private(set) var completion: ((Timer) -> ())?
         public private(set) var timer: Timer?
-        public private(set) var targetExecutor: TargetExecutor<Timer>?
+        public private(set) var completionExecutor: CompletionExecutor<Timer>?
         
         public override func timeInterval(_ timeInterval: TimeInterval) -> Self {
             self.timeInterval = timeInterval
@@ -44,7 +44,7 @@ public class MockTimerFactory: TimerFactory {
         
         public override func build() -> Timer {
             timer = super.build()
-            targetExecutor = TargetExecutor(sender: timer!, completion: completion)
+            completionExecutor = CompletionExecutor(sender: timer!, completion: completion)
             return timer!
         }
         

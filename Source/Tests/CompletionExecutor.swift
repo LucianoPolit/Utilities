@@ -1,12 +1,12 @@
 //
-//  TargetExecutor.swift
+//  CompletionExecutor.swift
 //
 //  Created by Luciano Polit on 3/5/18.
 //
 
 import Foundation
 
-public class TargetExecutor<T> {
+public class CompletionExecutor<T> {
     
     private var sender: T
     private var completion: ((T) -> ())?
@@ -16,7 +16,7 @@ public class TargetExecutor<T> {
         self.completion = completion
     }
     
-    public func callCompletion() {
+    public func execute() {
         completion?(sender)
     }
     

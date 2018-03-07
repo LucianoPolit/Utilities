@@ -9,8 +9,8 @@ import UIKit
 
 extension ViewController {
     
-    public var mockViewAnimator: MockViewAnimator {
-        return viewAnimator as! MockViewAnimator
+    public var mockAlertControllerFactory: MockAlertControllerFactory {
+        return alertControllerFactory as! MockAlertControllerFactory
     }
     public var mockQueueDispatcher: MockQueueDispatcher {
         return queueDispatcher as! MockQueueDispatcher
@@ -18,19 +18,15 @@ extension ViewController {
     public var mockTimerFactory: MockTimerFactory {
         return timerFactory as! MockTimerFactory
     }
-    public var mockAlertControllerFactory: MockAlertControllerFactory {
-        return alertControllerFactory as! MockAlertControllerFactory
-    }
-    public var mockGestureRecognizerFactory: MockGestureRecognizerFactory {
-        return gestureRecognizerFactory as! MockGestureRecognizerFactory
+    public var mockViewAnimator: MockViewAnimator {
+        return viewAnimator as! MockViewAnimator
     }
     
     public func mockUtilities() {
-        viewAnimator = MockViewAnimator()
+        alertControllerFactory = MockAlertControllerFactory()
         queueDispatcher = MockQueueDispatcher()
         timerFactory = MockTimerFactory()
-        alertControllerFactory = MockAlertControllerFactory()
-        gestureRecognizerFactory = MockGestureRecognizerFactory()
+        viewAnimator = MockViewAnimator()
     }
     
 }

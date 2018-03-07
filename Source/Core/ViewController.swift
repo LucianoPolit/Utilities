@@ -9,10 +9,9 @@ import UIKit
 
 open class ViewController: UIViewController {
     
-    public lazy var viewAnimator = ViewAnimator()
+    public lazy var alertControllerFactory = AlertControllerFactory()
     public lazy var queueDispatcher = QueueDispatcher()
     public lazy var timerFactory = TimerFactory()
-    public lazy var alertControllerFactory = AlertControllerFactory()
-    public lazy var gestureRecognizerFactory = GestureRecognizerFactory()
+    public lazy var viewAnimator = ViewAnimator()
     
 }

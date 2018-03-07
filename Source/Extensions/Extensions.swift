@@ -38,15 +38,14 @@ extension Array {
 extension Array where Element: Equatable {
     
     public mutating func remove(_ element: Element) {
-        while let index = index(of: element) {
-            remove(at: index)
-        }
+        while remove(firstAppearanceOf: element) { }
     }
     
-    public mutating func removeFirst(_ element: Element) {
-        if let index = index(of: element) {
-            remove(at: index)
-        }
+    @discardableResult
+    public mutating func remove(firstAppearanceOf element: Element) -> Bool {
+        guard let index = index(of: element) else { return false }
+        remove(at: index)
+        return true
     }
     
 }

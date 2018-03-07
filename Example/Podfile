@@ -2,10 +2,10 @@ platform :ios, '8.0'
 
 target 'Example' do
     use_frameworks!
-    pod 'Utilities', :path => '../'
+    pod 'AwesomeUtilities', :path => '../'
 end
 
 target 'ExampleTests' do
     use_frameworks!
-    pod 'Utilities/Tests', :path => '../'
+    pod 'AwesomeUtilities/Tests', :path => '../'
 end

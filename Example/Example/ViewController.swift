@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import Utilities
+import AwesomeUtilities
 
-class ViewController: Utilities.ViewController {
+class ViewController: AwesomeUtilities.ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
