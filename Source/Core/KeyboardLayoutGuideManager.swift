@@ -1,5 +1,5 @@
 //
-//  KeyboardLayoutManager.swift
+//  KeyboardLayoutGuideManager.swift
 //
 //  Created by Luciano Polit on 3/17/18.
 //
@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-public class KeyboardLayoutManager {
+public class KeyboardLayoutGuideManager {
     
     public var notificationCenter = NotificationCenter.default
     public let view: UIView = UIView()
@@ -47,19 +47,19 @@ public class KeyboardLayoutManager {
         NSLayoutConstraint.activate([left, right, height, bottom])
     }
     
-    public func viewWillAppear(_ animated: Bool) {
+    public func registerObservers() {
         notificationCenter.addObserver(self,
-                                       selector: #selector(KeyboardLayoutManager.keyboardWillShow(_:)),
+                                       selector: #selector(KeyboardLayoutGuideManager.keyboardWillShow(_:)),
                                        name: Notification.Name.UIKeyboardWillShow, object: nil)
         notificationCenter.addObserver(self,
-                                       selector: #selector(KeyboardLayoutManager.keyboardWillHide(_:)),
+                                       selector: #selector(KeyboardLayoutGuideManager.keyboardWillHide(_:)),
                                        name: Notification.Name.UIKeyboardWillHide, object: nil)
         notificationCenter.addObserver(self,
-                                       selector: #selector(KeyboardLayoutManager.keyboardWillShow(_:)),
+                                       selector: #selector(KeyboardLayoutGuideManager.keyboardWillShow(_:)),
                                        name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
-    public func viewWillDisappear(_ animated: Bool) {
+    public func unregisterObservers() {
         notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
         notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
         notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
@@ -67,7 +67,7 @@ public class KeyboardLayoutManager {
     
 }
 
-private extension KeyboardLayoutManager {
+private extension KeyboardLayoutGuideManager {
     
     @objc
     func keyboardWillShow(_ notification: Notification) {
@@ -86,7 +86,7 @@ private extension KeyboardLayoutManager {
     
 }
 
-private extension KeyboardLayoutManager {
+private extension KeyboardLayoutGuideManager {
     
     func update(using notification: Notification) {
         guard let superview = view.superview,
