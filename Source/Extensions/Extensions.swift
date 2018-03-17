@@ -76,3 +76,15 @@ extension UIColor {
     }
     
 }
+
+extension UIView {
+    
+    public var safeArea: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return safeAreaInsets
+        } else {
+            return .zero
+        }
+    }
+    
+}

@@ -13,5 +13,8 @@ open class ViewController: UIViewController {
     public lazy var queueDispatcher = QueueDispatcher()
     public lazy var timerFactory = TimerFactory()
     public lazy var viewAnimator = ViewAnimator()
+    public lazy var keyboardLayoutManager = { [unowned self] in
+        return KeyboardLayoutManager(view: self.view)
+    }()
     
 }

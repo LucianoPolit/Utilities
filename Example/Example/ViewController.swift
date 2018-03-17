@@ -11,8 +11,18 @@ import AwesomeUtilities
 
 class ViewController: AwesomeUtilities.ViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var keyboardLayoutGuideView: UIView {
+        return keyboardLayoutManager.view
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        keyboardLayoutManager.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        keyboardLayoutManager.viewWillDisappear(animated)
     }
 
 }
