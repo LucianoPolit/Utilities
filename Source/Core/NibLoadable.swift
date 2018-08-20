@@ -39,12 +39,22 @@ extension UITableView {
         register(T.nib, forCellReuseIdentifier: T.nibName)
     }
     
+    public func dequeueReusableCell<T: UITableViewCell & NibLoadable>(of type: T.Type,
+                                                                      for indexPath: IndexPath) -> T {
+        return dequeueReusableCell(withIdentifier: T.nibName, for: indexPath) as! T
+    }
+    
 }
 
 extension UICollectionView {
     
     public func register<T: UICollectionViewCell & NibLoadable>(cellType: T.Type) {
         register(T.nib, forCellWithReuseIdentifier: T.nibName)
+    }
+    
+    public func dequeueReusableCell<T: UICollectionViewCell & NibLoadable>(of type: T.Type,
+                                                                           for indexPath: IndexPath) -> T {
+        return dequeueReusableCell(withReuseIdentifier: T.nibName, for: indexPath) as! T
     }
     
 }
