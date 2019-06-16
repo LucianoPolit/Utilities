@@ -50,19 +50,19 @@ public class KeyboardLayoutGuideManager {
     public func registerObservers() {
         notificationCenter.addObserver(self,
                                        selector: #selector(KeyboardLayoutGuideManager.keyboardWillShow(_:)),
-                                       name: Notification.Name.UIKeyboardWillShow, object: nil)
+                                       name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self,
                                        selector: #selector(KeyboardLayoutGuideManager.keyboardWillHide(_:)),
-                                       name: Notification.Name.UIKeyboardWillHide, object: nil)
+                                       name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self,
                                        selector: #selector(KeyboardLayoutGuideManager.keyboardWillShow(_:)),
-                                       name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+                                       name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     public func unregisterObservers() {
-        notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
-        notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
-        notificationCenter.removeObserver(self, name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
 }
@@ -91,11 +91,11 @@ private extension KeyboardLayoutGuideManager {
     func update(using notification: Notification) {
         guard let superview = view.superview,
             let userInfo = notification.userInfo,
-            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as AnyObject?,
-            let keyboardEndFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue,
-            let animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber else { return }
+            let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject?,
+            let keyboardEndFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+            let animationCurve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber else { return }
         
-        let convertedAnimationCurve = UIViewAnimationOptions(rawValue: animationCurve.uintValue)
+        let convertedAnimationCurve = UIView.AnimationOptions(rawValue: animationCurve.uintValue)
         let convertedKeyboardFrame = superview.convert(keyboardEndFrame.cgRectValue, from: UIApplication.shared.keyWindow)
         let keyboardTopOffset = superview.bounds.maxY - convertedKeyboardFrame.minY
         bottom.constant = -keyboardTopOffset

@@ -22,7 +22,7 @@ public class MockViewAnimator: ViewAnimator {
         public private(set) var beginCalled = false
         public private(set) var duration: TimeInterval?
         public private(set) var delay: TimeInterval?
-        public private(set) var options: UIViewAnimationOptions?
+        public private(set) var options: UIView.AnimationOptions?
         public private(set) var animations: (() -> ())?
         public private(set) var completion: ((Bool) -> ())?
         public private(set) var commitCalled = false
@@ -42,7 +42,7 @@ public class MockViewAnimator: ViewAnimator {
             return self
         }
         
-        public override func options(_ options: UIViewAnimationOptions) -> Self {
+        public override func options(_ options: UIView.AnimationOptions) -> Self {
             self.options = options
             return self
         }

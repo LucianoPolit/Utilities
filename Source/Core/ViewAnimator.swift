@@ -18,7 +18,7 @@ public class ViewAnimator {
         private var isCommitted = false
         private var duration: TimeInterval?
         private var delay: TimeInterval = 0
-        private var options: UIViewAnimationOptions = []
+        private var options: UIView.AnimationOptions = []
         private var animations: (() -> ())?
         private var completion: ((Bool) -> ())?
         
@@ -36,7 +36,7 @@ public class ViewAnimator {
             return self
         }
         
-        public func options(_ options: UIViewAnimationOptions) -> Self {
+        public func options(_ options: UIView.AnimationOptions) -> Self {
             self.options = options
             return self
         }

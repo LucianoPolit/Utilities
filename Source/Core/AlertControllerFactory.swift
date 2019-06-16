@@ -10,7 +10,7 @@ import UIKit
 public protocol AlertController: class {
     func addAction(_ action: UIAlertAction)
     func addTextField(configurationHandler: ((UITextField) -> ())?)
-    init(title: String?, message: String?, preferredStyle: UIAlertControllerStyle)
+    init(title: String?, message: String?, preferredStyle: UIAlertController.Style)
 }
 
 public class AlertControllerFactory {
@@ -23,7 +23,7 @@ public class AlertControllerFactory {
         
         private var title: String?
         private var message: String?
-        private var preferredStyle: UIAlertControllerStyle = .alert
+        private var preferredStyle: UIAlertController.Style = .alert
         private var actions: [UIAlertAction] = []
         private var textFieldConfigurations: [(UITextField) -> ()] = []
         private var customConfiguration: ((T) -> ())?
@@ -38,13 +38,13 @@ public class AlertControllerFactory {
             return self
         }
         
-        public func preferredStyle(_ preferredStyle: UIAlertControllerStyle) -> Self {
+        public func preferredStyle(_ preferredStyle: UIAlertController.Style) -> Self {
             self.preferredStyle = preferredStyle
             return self
         }
         
         public func addAction(title: String?,
-                              style: UIAlertActionStyle,
+                              style: UIAlertAction.Style,
                               handler: ((UIAlertAction) -> ())? = nil) -> Self {
             let action = UIAlertAction(title: title, style: style, handler: handler)
             actions.append(action)

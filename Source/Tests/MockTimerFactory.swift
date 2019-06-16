@@ -10,7 +10,7 @@ public class MockTimerFactory: TimerFactory {
     
     public private(set) var builders: [MockBuilder] = []
     public var completionExecutors: [CompletionExecutor<Timer>] {
-        return builders.flatMap { $0.completionExecutor }
+        return builders.compactMap { $0.completionExecutor }
     }
     
     public override func create() -> Builder {

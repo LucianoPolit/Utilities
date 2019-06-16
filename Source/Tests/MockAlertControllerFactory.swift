@@ -17,7 +17,7 @@ public class MockAlertControllerFactory: AlertControllerFactory {
         
         public private(set) var title: String?
         public private(set) var message: String?
-        public private(set) var preferredStyle: UIAlertControllerStyle = .alert
+        public private(set) var preferredStyle: UIAlertController.Style = .alert
         public private(set) var actions: [UIAlertAction] = []
         public private(set) var textFieldConfigurations: [(UITextField) -> ()] = []
         public private(set) var customConfiguration: ((T) -> ())?
@@ -33,13 +33,13 @@ public class MockAlertControllerFactory: AlertControllerFactory {
             return self
         }
         
-        public override func preferredStyle(_ preferredStyle: UIAlertControllerStyle) -> Self {
+        public override func preferredStyle(_ preferredStyle: UIAlertController.Style) -> Self {
             self.preferredStyle = preferredStyle
             return self
         }
         
         public override func addAction(title: String?,
-                                       style: UIAlertActionStyle,
+                                       style: UIAlertAction.Style,
                                        handler: ((UIAlertAction) -> ())? = nil) -> Self {
             let action = UIAlertAction(title: title, style: style, handler: handler)
             actions.append(action)

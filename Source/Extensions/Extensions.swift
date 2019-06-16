@@ -43,7 +43,7 @@ extension Array where Element: Equatable {
     
     @discardableResult
     public mutating func remove(firstAppearanceOf element: Element) -> Bool {
-        guard let index = index(of: element) else { return false }
+        guard let index = firstIndex(of: element) else { return false }
         remove(at: index)
         return true
     }
