@@ -19,6 +19,7 @@ public class ViewAnimator {
         private var duration: TimeInterval?
         private var delay: TimeInterval = 0
         private var options: UIView.AnimationOptions = []
+        private var first: (() -> ())?
         private var animations: (() -> ())?
         private var completion: ((Bool) -> ())?
         
@@ -41,6 +42,11 @@ public class ViewAnimator {
             return self
         }
         
+        public func before(_ execution: @escaping () -> ()) -> Self {
+            self.first = execution
+            return self
+        }
+        
         public func animations(_ animations: @escaping () -> ()) -> Self {
             self.animations = animations
             return self
@@ -55,6 +61,7 @@ public class ViewAnimator {
             guard !isCommitted else { return }
             guard let duration = duration, let animations = animations
                 else { fatalError("Utilities -> ViewAnimator -> Incomplete animation") }
+            first?()
             UIView.animate(withDuration: duration,
                            delay: delay,
                            options: options,
