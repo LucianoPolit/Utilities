@@ -57,6 +57,14 @@ public class ViewAnimator {
             return self
         }
         
+        public func completion(_ completion: Animation) -> Self {
+            self.completion = { completed in
+                guard completed else { return }
+                completion.commit()
+            }
+            return self
+        }
+        
         public func commit() {
             guard !isCommitted else { return }
             guard let duration = duration, let animations = animations
