@@ -8,6 +8,8 @@ import Foundation
 
 public class TimerFactory {
     
+    public init() { }
+    
     public func create() -> Builder {
         return Builder()
     }

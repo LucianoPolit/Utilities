@@ -15,6 +15,8 @@ public protocol AlertController: class {
 
 public class AlertControllerFactory {
     
+    public init() { }
+    
     public func create<T: AlertController>(type: T.Type = T.self) -> Builder<T> {
         return Builder()
     }

@@ -10,6 +10,8 @@ public class QueueDispatcher {
     
     public var queue: DispatchQueue = .main
     
+    public init() { }
+    
     public func sync(execute block: () -> ()) {
         queue.sync(execute: block)
     }

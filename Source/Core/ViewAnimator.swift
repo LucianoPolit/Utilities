@@ -9,6 +9,8 @@ import UIKit
 
 public class ViewAnimator {
     
+    public init() { }
+    
     public func begin() -> Animation {
         return Animation().begin()
     }
