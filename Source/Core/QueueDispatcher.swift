@@ -6,17 +6,19 @@
 
 import Foundation
 
-public class QueueDispatcher {
+open class QueueDispatcher {
     
-    public var queue: DispatchQueue = .main
+    public let queue: DispatchQueue
     
-    public init() { }
+    public init(queue: DispatchQueue = .main) {
+        self.queue = queue
+    }
     
-    public func sync(execute block: () -> ()) {
+    open func sync(execute block: () -> ()) {
         queue.sync(execute: block)
     }
     
-    public func async(after deadline: DispatchTime = .now(),
+    open func async(after deadline: DispatchTime = .now(),
                       execute block: @escaping () -> ()) {
         queue.asyncAfter(deadline: deadline, execute: block)
     }

@@ -6,36 +6,38 @@
 
 import Foundation
 
-public class TimerFactory {
+open class TimerFactory {
     
     public init() { }
     
-    public func create() -> Builder {
+    open func create() -> Builder {
         return Builder()
     }
     
-    public class Builder {
+    open class Builder {
         
         private var timeInterval: TimeInterval?
         private var repeats: Bool = false
         private var completion: ((Timer) -> ())?
         
-        public func timeInterval(_ timeInterval: TimeInterval) -> Self {
+        public init() { }
+        
+        open func timeInterval(_ timeInterval: TimeInterval) -> Self {
             self.timeInterval = timeInterval
             return self
         }
         
-        public func repeats(_ repeats: Bool) -> Self {
+        open func repeats(_ repeats: Bool) -> Self {
             self.repeats = repeats
             return self
         }
         
-        public func completion(_ completion: @escaping (Timer) -> ()) -> Self {
+        open func completion(_ completion: @escaping (Timer) -> ()) -> Self {
             self.completion = completion
             return self
         }
         
-        public func build() -> Timer {
+        open func build() -> Timer {
             guard let timeInterval = timeInterval, let completion = completion
                 else { fatalError("Utilities -> TimerFactory -> Incomplete building") }
             let timerHandler = TimerHandler(completion: completion)

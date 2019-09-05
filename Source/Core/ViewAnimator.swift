@@ -7,15 +7,15 @@
 import Foundation
 import UIKit
 
-public class ViewAnimator {
+open class ViewAnimator {
     
     public init() { }
     
-    public func begin() -> Animation {
-        return Animation().begin()
+    open func begin() -> Animation {
+        return Animation()
     }
     
-    public class Animation {
+    open class Animation {
         
         private var isCommitted = false
         private var duration: TimeInterval?
@@ -25,57 +25,53 @@ public class ViewAnimator {
         private var animations: (() -> ())?
         private var completion: ((Bool) -> ())?
         
-        public func begin() -> Self {
-            return self
-        }
+        public init() { }
         
-        public func duration(_ duration: TimeInterval) -> Self {
+        open func duration(_ duration: TimeInterval) -> Self {
             self.duration = duration
             return self
         }
         
-        public func delay(_ delay: TimeInterval) -> Self {
+        open func delay(_ delay: TimeInterval) -> Self {
             self.delay = delay
             return self
         }
         
-        public func options(_ options: UIView.AnimationOptions) -> Self {
+        open func options(_ options: UIView.AnimationOptions) -> Self {
             self.options = options
             return self
         }
         
-        public func before(_ execution: @escaping () -> ()) -> Self {
+        open func before(_ execution: @escaping () -> ()) -> Self {
             self.first = execution
             return self
         }
         
-        public func animations(_ animations: @escaping () -> ()) -> Self {
+        open func animations(_ animations: @escaping () -> ()) -> Self {
             self.animations = animations
             return self
         }
         
-        public func completion(_ completion: @escaping (Bool) -> ()) -> Self {
+        open func completion(_ completion: @escaping (Bool) -> ()) -> Self {
             self.completion = completion
             return self
         }
         
-        public func completion(_ completion: Animation) -> Self {
-            self.completion = { completed in
+        open func completion(_ completion: Animation) -> Self {
+            return self.completion { completed in
                 guard completed else { return }
                 completion.commit()
             }
-            return self
         }
         
-        public func completion(_ completion: [Animation]) -> Self {
-            self.completion = { completed in
+        open func completion(_ completion: [Animation]) -> Self {
+            return self.completion { completed in
                 guard completed else { return }
                 completion.forEach { $0.commit() }
             }
-            return self
         }
         
-        public func commit() {
+        open func commit() {
             guard !isCommitted else { return }
             guard let duration = duration, let animations = animations
                 else { fatalError("Utilities -> ViewAnimator -> Incomplete animation") }

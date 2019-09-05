@@ -13,15 +13,15 @@ public protocol AlertController: class {
     init(title: String?, message: String?, preferredStyle: UIAlertController.Style)
 }
 
-public class AlertControllerFactory {
+open class AlertControllerFactory {
     
     public init() { }
     
-    public func create<T: AlertController>(type: T.Type = T.self) -> Builder<T> {
+    open func create<T: AlertController>(type: T.Type = T.self) -> Builder<T> {
         return Builder()
     }
     
-    public class Builder<T: AlertController> {
+    open class Builder<T: AlertController> {
         
         private var title: String?
         private var message: String?
@@ -30,22 +30,24 @@ public class AlertControllerFactory {
         private var textFieldConfigurations: [(UITextField) -> ()] = []
         private var customConfiguration: ((T) -> ())?
         
-        public func title(_ title: String) -> Self {
+        public init() { }
+        
+        open func title(_ title: String) -> Self {
             self.title = title
             return self
         }
         
-        public func message(_ message: String) -> Self {
+        open func message(_ message: String) -> Self {
             self.message = message
             return self
         }
         
-        public func preferredStyle(_ preferredStyle: UIAlertController.Style) -> Self {
+        open func preferredStyle(_ preferredStyle: UIAlertController.Style) -> Self {
             self.preferredStyle = preferredStyle
             return self
         }
         
-        public func addAction(title: String?,
+        open func addAction(title: String?,
                               style: UIAlertAction.Style,
                               handler: ((UIAlertAction) -> ())? = nil) -> Self {
             let action = UIAlertAction(title: title, style: style, handler: handler)
@@ -53,17 +55,17 @@ public class AlertControllerFactory {
             return self
         }
         
-        public func addTextField(_ configuration: @escaping (UITextField) -> () = { _ in }) -> Self {
+        open func addTextField(_ configuration: @escaping (UITextField) -> () = { _ in }) -> Self {
             textFieldConfigurations.append(configuration)
             return self
         }
         
-        public func configure(_ configuration: @escaping (T) -> ()) -> Self {
+        open func configure(_ configuration: @escaping (T) -> ()) -> Self {
             customConfiguration = configuration
             return self
         }
         
-        public func build() -> T {
+        open func build() -> T {
             let alertController = T(title: title,
                                     message: message,
                                     preferredStyle: preferredStyle)
