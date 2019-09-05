@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AwesomeUtilities'
-  s.version          = '1.4.0'
+  s.version          = '1.5.0'
   s.summary          = 'Swift Common Utilities'
   s.description      = <<-DESC
                           Swift Common Utilities.
