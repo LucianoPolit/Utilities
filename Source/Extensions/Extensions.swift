@@ -13,6 +13,10 @@ extension String {
         return NSLocalizedString(self, comment: "")
     }
     
+    public func localized(with arguments: CVarArg...) -> String {
+        String(format: localized, arguments: arguments)
+    }
+    
 }
 
 extension Collection {
@@ -84,6 +88,22 @@ extension UIView {
             return safeAreaInsets
         } else {
             return .zero
+        }
+    }
+    
+}
+
+extension UIViewController {
+    
+    public var topViewController: UIViewController {
+        let viewController = presentedViewController ?? self
+        switch viewController {
+        case let navigationController as UINavigationController:
+            return (navigationController.viewControllers.last ?? navigationController).topViewController
+        case let tabBarController as UITabBarController:
+            return (tabBarController.selectedViewController ?? tabBarController).topViewController
+        default:
+            return viewController
         }
     }
     

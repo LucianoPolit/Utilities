@@ -22,10 +22,11 @@ extension NibLoadable {
 extension NibLoadable where Self: UIView {
     
     public static var nib: UINib {
-        return UINib(nibName: nibName, bundle: nil)
+        return UINib(nibName: nibName, bundle: Bundle(for: self))
     }
     
-    public static func loadFromNib(bundle: Bundle = .main) -> Self {
+    public static func loadFromNib(bundle: Bundle? = nil) -> Self {
+        let bundle = bundle ?? Bundle(for: self)
         guard let view = bundle.loadNibNamed(nibName, owner: nil, options: nil)?.first as? Self
             else { fatalError("Utilities -> NibLoadable -> Impossible to load \(Self.nibName)") }
         return view
