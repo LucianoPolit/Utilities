@@ -54,6 +54,92 @@ extension Array where Element: Equatable {
     
 }
 
+extension Array {
+    
+    public func prepending(
+        _ value: Element
+    ) -> [Element] {
+        var copy = self
+        copy.prepend(value)
+        return copy
+    }
+    
+    public func prepending(
+        contentsOf value: [Element]
+    ) -> [Element] {
+        var copy = self
+        copy.prepend(contentsOf: value)
+        return copy
+    }
+    
+    public func inserting(
+        _ value: Element,
+        at index: Int
+    ) -> [Element] {
+        var copy = self
+        copy.insert(value, at: index)
+        return copy
+    }
+    
+    public func inserting(
+        contentsOf value: [Element],
+        at index: Int
+    ) -> [Element] {
+        var copy = self
+        copy.insert(contentsOf: value, at: index)
+        return copy
+    }
+    
+    public func appending(
+        _ value: Element
+    ) -> [Element] {
+        var copy = self
+        copy.append(value)
+        return copy
+    }
+    
+    public func appending(
+        contentsOf value: [Element]
+    ) -> [Element] {
+        var copy = self
+        copy.append(contentsOf: value)
+        return copy
+    }
+    
+    public func removing(
+        at index: Int
+    ) -> [Element] {
+        var copy = self
+        copy.remove(at: index)
+        return copy
+    }
+    
+}
+
+extension Array where Element: Equatable {
+    
+    public func removing(
+        _ value: Element
+    ) -> [Element] {
+        var copy = self
+        while let index = copy.firstIndex(where: { $0 == value }) {
+            copy.remove(at: index)
+        }
+        return copy
+    }
+    
+    public func removing(
+        contentsOf value: [Element]
+    ) -> [Element] {
+        var copy = self
+        value.forEach {
+            copy = copy.removing($0)
+        }
+        return copy
+    }
+    
+}
+
 extension UIColor {
     
     public convenience init(hex: String) {
