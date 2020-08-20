@@ -6,6 +6,7 @@
 
 import Foundation
 import UIKit
+import AwesomeUtilities
 
 public class MockAlertControllerFactory: AlertControllerFactory {
     

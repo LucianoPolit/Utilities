@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
 
-  s.name             = 'AwesomeUtilities'
+  s.name             = 'AwesomeUtilitiesTests'
   s.version          = '1.7.0'
-  s.summary          = 'Swift Common Utilities'
+  s.summary          = 'Swift Common Utilities Tests'
   s.description      = <<-DESC
-                          Swift Common Utilities.
+                          Swift Common Utilities Tests.
                           DESC
   s.homepage         = 'https://github.com/lucianopolit/Utilities'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -13,12 +13,8 @@ Pod::Spec.new do |s|
   s.platform         = :ios, "8.0"
   s.swift_version    = '5.0'
 
-  s.subspec 'Core' do |ss|
-    ss.source_files  = 'Source/Core/*.swift'
-  end
-
-  s.subspec 'Extensions' do |ss|
-    ss.source_files  = 'Source/Extensions/*.swift'
+  s.subspec 'Tests' do |ss|
+    ss.source_files  = 'Source/Tests/*.swift'
     ss.dependency      'AwesomeUtilities/Core'
   end
 

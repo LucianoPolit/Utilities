@@ -6,6 +6,7 @@
 
 import Foundation
 import UIKit
+import AwesomeUtilities
 
 extension ViewController {
     
@@ -46,7 +47,7 @@ extension UIView {
         return views
     }
     
-    public func findFirst<T: UIView>(type: T.Type = T.self) -> T? {
+    public func findFirst<T: UIView>(ofType type: T.Type = T.self) -> T? {
         return find().first
     }
     

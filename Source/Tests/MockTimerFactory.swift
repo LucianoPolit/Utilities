@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import AwesomeUtilities
 
 public class MockTimerFactory: TimerFactory {
     

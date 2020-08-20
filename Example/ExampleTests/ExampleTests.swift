@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import Example
+import AwesomeUtilitiesTests
 
 class ExampleTests: XCTestCase {
     
