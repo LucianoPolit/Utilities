@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'AwesomeUtilitiesTests'
-  s.version          = '1.7.0'
+  s.version          = '1.8.0'
   s.summary          = 'Swift Common Utilities Tests'
   s.description      = <<-DESC
                           Swift Common Utilities Tests.
@@ -12,10 +12,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/lucianopolit/Utilities.git', :tag => s.version.to_s }
   s.platform         = :ios, "8.0"
   s.swift_version    = '5.0'
-
-  s.subspec 'Tests' do |ss|
-    ss.source_files  = 'Source/Tests/*.swift'
-    ss.dependency      'AwesomeUtilities/Core'
-  end
+  s.source_files     = 'Source/Tests/*.swift'
+  s.dependency         'AwesomeUtilities'
 
 end
