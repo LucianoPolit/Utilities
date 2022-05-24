@@ -167,18 +167,16 @@ extension UIColor {
     
     public var hex: String {
         let components = cgColor.components
-        let r: CGFloat = components?[safe: 0] ?? 0.0
-        let g: CGFloat = components?[safe: 1] ?? 0.0
-        let b: CGFloat = components?[safe: 2] ?? 0.0
-
-        let hexString = String(
+        let r = components?[safe: 0] ?? 0
+        let g = components?[safe: components?.count == 2 ? 0 : 1] ?? 0
+        let b = components?[safe: components?.count == 2 ? 0 : 2] ?? 0
+        
+        return String(
             format: "#%02lX%02lX%02lX",
             lroundf(Float(r * 255)),
             lroundf(Float(g * 255)),
             lroundf(Float(b * 255))
         )
-        
-        return hexString
      }
     
 }
