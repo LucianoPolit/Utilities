@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'AwesomeUtilitiesTests'
-  s.version          = '1.8.0'
+  s.version          = '1.9.0'
   s.summary          = 'Swift Common Utilities Tests'
   s.description      = <<-DESC
                           Swift Common Utilities Tests.
