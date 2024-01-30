@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Luciano Polit' => 'lucianopolit@gmail.com' }
   s.source           = { :git => 'https://github.com/lucianopolit/Utilities.git', :tag => s.version.to_s }
-  s.platform         = :ios, "8.0"
+  s.platform         = :ios, "12.0"
   s.swift_version    = '5.0'
 
   s.subspec 'Core' do |ss|
