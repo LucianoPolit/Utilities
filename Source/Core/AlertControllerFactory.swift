@@ -60,7 +60,7 @@ open class AlertControllerFactory {
 
 extension AlertControllerFactory.Builder where T: AlertController {
     
-    open func build() -> T {
+    public func build() -> T {
         let alertController = T(
             title: title,
             message: message
