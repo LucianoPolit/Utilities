@@ -5,104 +5,88 @@
 //
 
 import Foundation
-import UIKit
 
 public protocol AlertController: class {
-    func addAction(_ action: UIAlertAction)
-    func addTextField(configurationHandler: ((UITextField) -> ())?)
-    init(title: String?, message: String?, preferredStyle: UIAlertController.Style)
+    
+    init(
+        title: String?,
+        message: String?
+    )
+    
 }
 
 open class AlertControllerFactory {
     
     public init() { }
     
-    open func create<T: AlertController>(type: T.Type = T.self) -> Builder<T> {
-        return Builder()
+    open func create<T>(
+        type: T.Type = T.self
+    ) -> Builder<T> {
+        Builder()
     }
     
-    open class Builder<T: AlertController> {
+    open class Builder<T> {
         
-        private var title: String?
-        private var message: String?
-        private var preferredStyle: UIAlertController.Style = .alert
-        private var actions: [UIAlertAction] = []
-        private var textFieldConfigurations: [(UITextField) -> ()] = []
-        private var customConfiguration: ((T) -> ())?
+        public private(set) var title: String?
+        public private(set) var message: String?
+        public private(set) var configurations: [((T) -> ())] = []
         
         public init() { }
         
-        open func title(_ title: String) -> Self {
+        open func title(
+            _ title: String
+        ) -> Self {
             self.title = title
             return self
         }
         
-        open func message(_ message: String) -> Self {
+        open func message(
+            _ message: String
+        ) -> Self {
             self.message = message
             return self
         }
         
-        open func preferredStyle(_ preferredStyle: UIAlertController.Style) -> Self {
-            self.preferredStyle = preferredStyle
+        open func configure(
+            _ configuration: @escaping (T) -> ()
+        ) -> Self {
+            configurations.append(configuration)
             return self
-        }
-        
-        open func addAction(title: String?,
-                              style: UIAlertAction.Style,
-                              handler: ((UIAlertAction) -> ())? = nil) -> Self {
-            let action = UIAlertAction(title: title, style: style, handler: handler)
-            actions.append(action)
-            return self
-        }
-        
-        open func addTextField(_ configuration: @escaping (UITextField) -> () = { _ in }) -> Self {
-            textFieldConfigurations.append(configuration)
-            return self
-        }
-        
-        open func configure(_ configuration: @escaping (T) -> ()) -> Self {
-            customConfiguration = configuration
-            return self
-        }
-        
-        open func build() -> T {
-            let alertController = T(title: title,
-                                    message: message,
-                                    preferredStyle: preferredStyle)
-            actions.forEach {
-                alertController.addAction($0)
-            }
-            textFieldConfigurations.forEach {
-                alertController.addTextField(configurationHandler: $0)
-            }
-            customConfiguration?(alertController)
-            return alertController
         }
         
     }
     
 }
 
-extension UIAlertController: AlertController { }
-
-extension AlertControllerFactory {
+extension AlertControllerFactory.Builder where T: AlertController {
     
-    public func create() -> Builder<UIAlertController> {
-        return create(type: UIAlertController.self)
+    open func build() -> T {
+        let alertController = T(
+            title: title,
+            message: message
+        )
+        configurations.forEach {
+            $0(alertController)
+        }
+        return alertController
     }
     
 }
 
-extension AlertControllerFactory.Builder where T: UIViewController {
+extension AlertControllerFactory.Builder where T: AlertController & UIViewController {
     
     @discardableResult
-    public func present(from viewController: UIViewController,
-                        animated: Bool = true,
-                        completion: (() -> ())? = nil) -> T {
+    public func present(
+        from viewController: UIViewController,
+        animated: Bool = true,
+        completion: (() -> ())? = nil
+    ) -> T {
         let alertController = build()
-        viewController.present(alertController,
-                               animated: animated,
-                               completion: completion)
+        viewController.present(
+            alertController,
+            animated: animated,
+            completion: completion
+        )
         return alertController
     }
     
